@@ -1,6 +1,5 @@
 import allure
 import pytest
-from locators.order_page_locators import OrderPageLocators
 from data import user_1, user_2
 
 from pages.order_page import OrderPage
@@ -20,7 +19,8 @@ class TestOrderForm:
         order_page.rental_information_input(comment)
         order_page.click_yes_button_confirmation_pop_up()
 
-        assert driver.find_element(*OrderPageLocators.COMPLETE_ORDER_POP_UP).is_displayed()
+        assert order_page.is_order_success_popup_displayed(), \
+            "Попап об успешном заказе не отобразился"
 
     @allure.title('Проверка заказа самоката через нижнюю кнопку "Заказать')
     @pytest.mark.parametrize('name, last_name, address, station, number, comment', [user_2])
@@ -34,4 +34,5 @@ class TestOrderForm:
         order_page.rental_information_input(comment)
         order_page.click_yes_button_confirmation_pop_up()
 
-        assert driver.find_element(*OrderPageLocators.COMPLETE_ORDER_POP_UP).is_displayed()
+        assert order_page.is_order_success_popup_displayed(), \
+            "Попап об успешном заказе не отобразился"

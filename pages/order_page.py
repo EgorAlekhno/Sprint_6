@@ -76,6 +76,10 @@ class OrderPage(BasePage):
     def check_displaying_of_confirm_window(self):
         self.is_element_visible(OrderPageLocators.POP_UP_CONFIRM_ORDER)
 
+    @allure.step("Проверка отображения попапа успешного оформления заказа")
+    def is_order_success_popup_displayed(self):
+        return self.find_element_with_wait(OrderPageLocators.COMPLETE_ORDER_POP_UP).is_displayed()
+
     @allure.step('Нажать кнопку "Да" в окне подтверждения заказа')
     def click_yes_button_confirmation_pop_up(self):
         self.click_to_element(OrderPageLocators.YES_POP_BUTTON)
